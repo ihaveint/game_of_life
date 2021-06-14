@@ -7,6 +7,7 @@ defmodule Game.Loop do
     spawn(fn ->
       draw_game(GenServer.call(Server, {:get_live_coordinates}))
     end)
+
     IO.puts("moving to the next transition")
     GenServer.cast(Server, {:transit})
     :timer.sleep(5000)
@@ -14,6 +15,7 @@ defmodule Game.Loop do
   end
 
   defp draw_game(live_coordinates) do
+    # TODO: maybe add a GUI instead of this?
     Enum.each(live_coordinates, fn live_coordinate ->
       IO.inspect(live_coordinate)
     end)

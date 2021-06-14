@@ -29,7 +29,7 @@ defmodule Cell do
         |> Enum.zip([-1, 0, 1, -1, 1, -1, 0, 1])
         |> Enum.map(fn {dx, dy} ->
           neighbour_coordinates = {x + dx, y + dy}
-          _neighbour_status = GenServer.call(Server, {:get_cell_status, neighbour_coordinates}) 
+          _neighbour_status = GenServer.call(Server, {:get_cell_status, neighbour_coordinates})
         end)
 
       live_counter = Enum.count(neighbours_status, fn status -> status == :live end)
@@ -49,8 +49,7 @@ defmodule Cell do
             else
               :dead
             end
-      end
-
+        end
 
       :timer.sleep(1000)
 
