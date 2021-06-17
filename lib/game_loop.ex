@@ -15,9 +15,30 @@ defmodule Game.Loop do
   end
 
   defp draw_game(live_coordinates) do
-    # TODO: maybe add a GUI instead of this?
-    Enum.each(live_coordinates, fn live_coordinate ->
-      IO.inspect(live_coordinate)
+    IO.ANSI.clear()
+    -10..10
+    |> Enum.flat_map(fn x ->
+      -10..10
+      |> Enum.map(fn y ->
+        coordinate = {x, y}
+
+        live? = Enum.member?(live_coordinates, coordinate)
+
+        if live? do
+          "*"
+        else
+          "."
+        end
+      end)
     end)
+    |> Enum.chunk_every(21)
+    |> Enum.each(fn line ->
+      Enum.join(line, "")
+      |> IO.puts()
+    end)
+
+    #Enum.each(live_coordinates, fn live_coordinate ->
+      #IO.inspect(live_coordinate)
+    #end)
   end
 end
